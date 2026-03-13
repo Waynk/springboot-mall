@@ -1,6 +1,7 @@
 package own.mall.model;
 
 import lombok.Data;
+import own.mall.constant.ProductCategory;
 
 import java.util.Date;
 
@@ -9,7 +10,7 @@ public class Product {
 
     private Integer product_id;
     private String product_name;
-    private String category;
+    private ProductCategory category;
     private String imageUrl;
     private Integer price;
     private Integer stock;
