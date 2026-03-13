@@ -23,6 +23,19 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public List<Product> getProducts() {
+        String sql = "SELECT product_id, product_name, category, image_url, price, stock, description," +
+                " created_date, last_modified_date" +
+                " FROM product";
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+
+        return productList;
+    }
+
+    @Override
     public Integer createProduct(ProductRequest productRequest) {
         // SQL 的冒號後面名稱必須與 map.put 的 Key 完全一致
         String sql = "INSERT INTO product (product_name, category, image_url, price, stock, description, created_date, last_modified_date) " +

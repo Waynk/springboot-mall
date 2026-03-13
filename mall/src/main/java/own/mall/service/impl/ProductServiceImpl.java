@@ -7,11 +7,19 @@ import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
 import own.mall.service.ProductService;
 
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
    @Autowired
    private ProductDao productDao;
+
+    @Override
+    public List<Product> getProducts() {
+        List<Product> productList = productDao.getProducts();
+        return productList;
+    }
 
     @Override
     public Product getProductById(Integer productId) {
