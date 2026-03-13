@@ -65,4 +65,26 @@ public class ProductDaoImpl implements ProductDao {
             return null;
         }
     }
+
+
+    @Override
+    public void updateProduct(Integer productId, ProductRequest productRequest) {
+        // 在 WHERE 前面多加一個空格
+        String sql = "UPDATE product SET product_name = :productName, category = :category, image_url = :imageUrl, " +
+                "price = :price, stock = :stock, description = :description, last_modified_date = :lastModifiedDate " +
+                "WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("productName", productRequest.getProduct_name());
+        map.put("category", productRequest.getCategory().name()); // 建議用 .name()
+        map.put("imageUrl", productRequest.getImageUrl());
+        map.put("price", productRequest.getPrice());
+        map.put("stock", productRequest.getStock());
+        map.put("description", productRequest.getDescription());
+        map.put("lastModifiedDate", LocalDateTime.now());
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
 }
