@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import own.mall.constant.ProductCategory;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
 import own.mall.service.ProductService;
@@ -18,8 +19,10 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProduct(){
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProduct(
+           @RequestParam ProductCategory category
+    ){
+        List<Product> productList = productService.getProducts(category);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 

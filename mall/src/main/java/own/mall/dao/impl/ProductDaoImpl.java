@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import own.mall.constant.ProductCategory;
 import own.mall.dao.ProductDao;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
@@ -23,12 +24,17 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category) {
         String sql = "SELECT product_id, product_name, category, image_url, price, stock, description," +
                 " created_date, last_modified_date" +
-                " FROM product";
+                " FROM product WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
+
+        if (category != null) {
+            sql = sql + " AND category = :category";
+            map.put("category", category.name());
+        }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 

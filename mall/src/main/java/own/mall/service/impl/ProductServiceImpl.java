@@ -2,6 +2,7 @@ package own.mall.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import own.mall.constant.ProductCategory;
 import own.mall.dao.ProductDao;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
    private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        List<Product> productList = productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category) {
+        List<Product> productList = productDao.getProducts(category);
         return productList;
     }
 
