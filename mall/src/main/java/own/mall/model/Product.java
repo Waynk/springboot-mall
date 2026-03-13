@@ -1,9 +1,10 @@
 package own.mall.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import own.mall.constant.ProductCategory;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class Product {
@@ -15,7 +16,9 @@ public class Product {
     private Integer price;
     private Integer stock;
     private String description;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime lastModifiedDate;
 
 }
