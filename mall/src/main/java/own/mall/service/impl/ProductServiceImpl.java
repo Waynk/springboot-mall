@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import own.mall.constant.ProductCategory;
 import own.mall.dao.ProductDao;
+import own.mall.dto.ProductQueryParams;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
 import own.mall.service.ProductService;
@@ -17,8 +18,8 @@ public class ProductServiceImpl implements ProductService {
    private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        List<Product> productList = productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        List<Product> productList = productDao.getProducts(productQueryParams);
         return productList;
     }
 

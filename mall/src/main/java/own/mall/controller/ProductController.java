@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import own.mall.constant.ProductCategory;
+import own.mall.dto.ProductQueryParams;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
 import own.mall.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
            @RequestParam(required = false) ProductCategory category,
            @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 

@@ -1,6 +1,6 @@
 package own.mall.service;
 
-import own.mall.constant.ProductCategory;
+import own.mall.dto.ProductQueryParams;
 import own.mall.dto.ProductRequest;
 import own.mall.model.Product;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
