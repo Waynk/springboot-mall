@@ -12,6 +12,7 @@ import own.mall.dao.ProductDao;
 import own.mall.dao.UserDao;
 import own.mall.dto.BuyItem;
 import own.mall.dto.CreateOrderRequest;
+import own.mall.dto.OrderQueryParams;
 import own.mall.model.Order;
 import own.mall.model.OrderItem;
 import own.mall.model.Product;
@@ -34,6 +35,23 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = orderDao.getOrderItemByOrderId(order.getOrderId());
+            order.setOrderItems(orderItemList);
+        }
+
+        return orderList;
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
