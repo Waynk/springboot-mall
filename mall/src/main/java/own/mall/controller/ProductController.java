@@ -19,6 +19,7 @@ import java.util.List;
 
 @Validated
 @RestController
+@CrossOrigin
 public class ProductController {
 
     @Autowired
@@ -33,7 +34,7 @@ public class ProductController {
            @RequestParam(defaultValue = "created_date") String orderBy,
            @RequestParam(defaultValue = "desc") String sort,
 
-           @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+           @RequestParam(defaultValue = "20") @Max(1000) @Min(0) Integer limit,
            @RequestParam(defaultValue = "0") @Min(0) Integer offset
 
     ){
